@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>(function(){
+function mem(){var m={};return {getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}},key:function(i){var ks=Object.keys(m);return i>=0&&i<ks.length?ks[i]:null},get length(){return Object.keys(m).length}};}
+['localStorage','sessionStorage'].forEach(function(n){
+try{var s=window[n];s.setItem('__fugte_probe','1');s.removeItem('__fugte_probe');}
+catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}catch(e2){}}
+});
+})();</script>
+
+
+
+
+
+
+<style>html, body { margin: 0; }
+  .rio-driver-widget.rio-show-step-2 .rio-price-table-card { display: none; }
+  .rio-driver-widget.rio-show-step-2 .rio-header { margin-bottom: 12px; padding-bottom: 10px; }
+  .rio-status { margin-top: 12px; padding: 10px 12px; border-radius: 8px; font-size: 13px; display: none; }
+  .rio-status.error { display:block; background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+  .rio-status.info { display:block; background:#eff6ff; color:#1e40af; border:1px solid #bfdbfe; }
+  .rio-status.success { display:block; background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+  .rio-submit-btn { text-decoration:none; }
+</style>
+<style id="fugte-style">@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+  :root {
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --text: #1E293B;
+    --muted: #64748B;
+    --accent: #0F766E;
+    --border: #E2E8F0;
+    --radius: 14px;
+    --font: Plus Jakarta Sans, 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .rio-driver-widget {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 12px;
+    min-width: 280px;
+    font-family: var(--font);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .rio-driver-widget *,
+  .rio-driver-widget *::before,
+  .rio-driver-widget *::after {
+    box-sizing: border-box;
+  }
+
+  .rio-driver-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 10px 30px -10px rgba(10, 25, 47, 0.08);
+  }
+
+  .rio-header {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .rio-badge-wrap {
+    min-height: 24px;
+    margin-bottom: 6px;
+  }
+
+  .rio-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(15, 118, 110, 0.1);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .rio-title {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .rio-subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .rio-price-table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 0.75);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .rio-airport-guide {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 9px 14px;
+    background: rgba(15, 118, 110, 0.08);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .rio-airport-guide strong {
+    color: var(--accent);
+  }
+
+  .rio-table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.03);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rio-route-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .rio-route-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    font-size: 13px;
+    transition: background 0.15s ease;
+  }
+
+  .rio-route-row:last-child {
+    border-bottom: none;
+  }
+
+  .rio-route-row:hover {
+    background: rgba(15, 118, 110, 0.04);
+  }
+
+  .rio-route-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rio-route-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .rio-route-eta {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .rio-route-price {
+    font-family: 'Space Grotesk', var(--font);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .rio-booking-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 0.75);
+    padding: 20px;
+  }
+
+  .rio-step-indicator {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .rio-step-pill {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: calc(var(--radius) * 0.4);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .rio-step-pill.active {
+    background: var(--surface);
+    color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(15, 118, 110, 0.1);
+  }
+
+  .rio-step-hidden {
+    display: none !important;
+  }
+
+  .rio-next-step-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px 20px;
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: calc(var(--radius) * 0.5);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+  }
+
+  .rio-next-step-btn:hover {
+    filter: brightness(1.1);
+  }
+
+  .rio-nav-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .rio-prev-step-btn {
+    flex: 1;
+    padding: 14px 16px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 0.5);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .rio-prev-step-btn:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .rio-nav-buttons .rio-submit-btn {
+    flex: 2;
+    margin-top: 0;
+  }
+
+  .rio-section-title {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rio-section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .rio-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .rio-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .rio-full {
+    grid-column: 1 / -1;
+  }
+
+  .rio-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .rio-field input,
+  .rio-field select,
+  .rio-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--text);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 0.5);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .rio-field input:focus,
+  .rio-field select:focus,
+  .rio-field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+  }
+
+  .rio-field textarea {
+    resize: vertical;
+    min-height: 70px;
+  }
+
+  .rio-select-wrap {
+    position: relative;
+  }
+
+  .rio-stepper {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) * 0.5);
+    overflow: hidden;
+  }
+
+  .rio-stepper input {
+    border: none;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: 700;
+    background: transparent;
+    border-radius: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .rio-step-btn {
+    border: none;
+    background: transparent;
+    padding: 0 14px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rio-step-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--accent);
+  }
+
+  .rio-step-btn:active {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .rio-fare-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: rgba(15, 118, 110, 0.06);
+    border: 1px solid rgba(15, 118, 110, 0.18);
+    border-radius: calc(var(--radius) * 0.5);
+  }
+
+  .rio-fare-label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rio-fare-label span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .rio-fare-label small {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .rio-fare-display {
+    font-family: 'Space Grotesk', var(--font);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .rio-fare-display .rio-currency {
+    font-size: 18px;
+  }
+
+  .rio-submit-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: #0070ba;
+    color: #ffffff;
+    border: none;
+    border-radius: calc(var(--radius) * 0.5);
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 112, 186, 0.3);
+    transition: transform 0.1s ease, filter 0.15s ease, background-color 0.15s;
+  }
+
+  .rio-paypal-hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 8px 0 0 0;
+  }
+
+  .rio-submit-btn:hover {
+    filter: brightness(1.08);
+  }
+
+  .rio-submit-btn:active {
+    transform: scale(0.99);
+  }
+
+  .rio-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .fugte-form-loading,
+  .fugte-form-success,
+  .fugte-form-error {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: calc(var(--radius) * 0.5);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .fugte-form-loading {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text);
+  }
+
+  .fugte-form-success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+
+  .fugte-form-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  .rio-footer {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .rio-footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 520px) {
+    .rio-driver-card {
+      padding: 16px;
+    }
+    .rio-form-grid {
+      grid-template-columns: 1fr;
+    }
+    .rio-fare-summary {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .rio-nav-buttons {
+      flex-direction: column;
+    }
+  }</style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="rio-driver-widget" id="rio-transfer-root">
+  <div class="rio-driver-card">
+    <header class="rio-header">
+      <div class="rio-badge-wrap">
+        
+          <span class="rio-badge">Official Fixed Airport Transfers</span>
+        
+      </div>
+      <h2 class="rio-title">Rio Private Driver</h2>
+      
+        <p class="rio-subtitle">Executive door-to-door transfer between Rio de Janeiro airports & Região dos Lagos</p>
+      
+    </header>
+
+    <div class="rio-price-table-card">
+      <div class="rio-airport-guide">
+        <span><strong>GIG:</strong> Rio de Janeiro Galeão International Airport</span>
+        <span><strong>SDU:</strong> Rio de Janeiro Santos Dumont Airport (Domestic / City)</span>
+      </div>
+      <div class="rio-table-header">
+        <span>Route</span>
+        <span>Fixed Rate</span>
+      </div>
+      <ul class="rio-route-list">
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-0">
+            <div class="rio-route-info">
+              <span class="rio-route-name">GIG Airport → Búzios</span>
+              
+                <span class="rio-route-eta">Approx. 2h 45m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>210
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-1">
+            <div class="rio-route-info">
+              <span class="rio-route-name">Búzios → GIG Airport</span>
+              
+                <span class="rio-route-eta">Approx. 2h 45m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>210
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-2">
+            <div class="rio-route-info">
+              <span class="rio-route-name">SDU Airport → Búzios</span>
+              
+                <span class="rio-route-eta">Approx. 3h 00m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>210
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-3">
+            <div class="rio-route-info">
+              <span class="rio-route-name">Búzios → SDU Airport</span>
+              
+                <span class="rio-route-eta">Approx. 3h 00m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>210
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-4">
+            <div class="rio-route-info">
+              <span class="rio-route-name">GIG Airport → Cabo Frio</span>
+              
+                <span class="rio-route-eta">Approx. 2h 30m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>195
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-5">
+            <div class="rio-route-info">
+              <span class="rio-route-name">Cabo Frio → GIG Airport</span>
+              
+                <span class="rio-route-eta">Approx. 2h 30m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>195
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-6">
+            <div class="rio-route-info">
+              <span class="rio-route-name">SDU Airport → Cabo Frio</span>
+              
+                <span class="rio-route-eta">Approx. 2h 40m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>195
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-7">
+            <div class="rio-route-info">
+              <span class="rio-route-name">Cabo Frio → SDU Airport</span>
+              
+                <span class="rio-route-eta">Approx. 2h 40m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>195
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-8">
+            <div class="rio-route-info">
+              <span class="rio-route-name">GIG / SDU → Arraial do Cabo</span>
+              
+                <span class="rio-route-eta">Approx. 2h 50m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>205
+            </div>
+          </li>
+        
+          <li class="rio-route-row" data-fugte-block-id="preset-9">
+            <div class="rio-route-info">
+              <span class="rio-route-name">Arraial do Cabo → GIG / SDU</span>
+              
+                <span class="rio-route-eta">Approx. 2h 50m</span>
+              
+            </div>
+            <div class="rio-route-price">
+              <span class="rio-currency">US$</span>205
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+
+    <section class="rio-booking-section">
+      <h3 class="rio-section-title">Schedule Your Transfer</h3>
+
+      <form class="rio-booking-form">
+        <div class="rio-step-indicator">
+          <span class="rio-step-pill active" data-step-indicator="1">1. Trip Details</span>
+          <span class="rio-step-pill" data-step-indicator="2">2. Passenger &amp; Payment</span>
+        </div>
+
+        <div class="rio-step-panel rio-step-1" data-step-panel="1">
+          <div class="rio-form-grid">
+            <div class="rio-field rio-full">
+              <label for="rio_route_select">Selected Transfer Route *</label>
+              <div class="rio-select-wrap">
+              <select id="rio_route_select" name="route" required>
+                
+                  <option value="GIG Airport → Búzios" data-price="210" selected>
+                    GIG Airport → Búzios — US$210
+                  </option>
+                
+                  <option value="Búzios → GIG Airport" data-price="210" >
+                    Búzios → GIG Airport — US$210
+                  </option>
+                
+                  <option value="SDU Airport → Búzios" data-price="210" >
+                    SDU Airport → Búzios — US$210
+                  </option>
+                
+                  <option value="Búzios → SDU Airport" data-price="210" >
+                    Búzios → SDU Airport — US$210
+                  </option>
+                
+                  <option value="GIG Airport → Cabo Frio" data-price="195" >
+                    GIG Airport → Cabo Frio — US$195
+                  </option>
+                
+                  <option value="Cabo Frio → GIG Airport" data-price="195" >
+                    Cabo Frio → GIG Airport — US$195
+                  </option>
+                
+                  <option value="SDU Airport → Cabo Frio" data-price="195" >
+                    SDU Airport → Cabo Frio — US$195
+                  </option>
+                
+                  <option value="Cabo Frio → SDU Airport" data-price="195" >
+                    Cabo Frio → SDU Airport — US$195
+                  </option>
+                
+                  <option value="GIG / SDU → Arraial do Cabo" data-price="205" >
+                    GIG / SDU → Arraial do Cabo — US$205
+                  </option>
+                
+                  <option value="Arraial do Cabo → GIG / SDU" data-price="205" >
+                    Arraial do Cabo → GIG / SDU — US$205
+                  </option>
+                
+              </select>
+            </div>
+          </div>
+
+          <div class="rio-field">
+            <label for="rio_date">Pickup Date *</label>
+            <input type="date" id="rio_date" name="pickup_date" required>
+          </div>
+
+          <div class="rio-field">
+            <label for="rio_time">Pickup Time *</label>
+            <input type="time" id="rio_time" name="pickup_time" required>
+          </div>
+        </div>
+
+        <button type="button" class="rio-next-step-btn" id="rio_next_btn">
+          Next: Passenger &amp; Ride Details &rarr;
+        </button>
+      </div>
+
+      <div class="rio-step-panel rio-step-2 rio-step-hidden" data-step-panel="2">
+        <div class="rio-form-grid">
+          <div class="rio-field">
+            <label for="rio_passengers">Passengers *</label>
+            <div class="rio-stepper">
+              <button type="button" class="rio-step-btn" data-step="passengers" data-dir="-1" aria-label="Decrease passengers">−</button>
+              <input type="number" id="rio_passengers" name="passengers" value="2" min="1" max="3" readonly required>
+              <button type="button" class="rio-step-btn" data-step="passengers" data-dir="1" aria-label="Increase passengers">+</button>
+            </div>
+          </div>
+
+          <div class="rio-field">
+            <label for="rio_luggage">Luggage (Bags) *</label>
+            <div class="rio-stepper">
+              <button type="button" class="rio-step-btn" data-step="luggage" data-dir="-1" aria-label="Decrease luggage">−</button>
+              <input type="number" id="rio_luggage" name="luggage" value="2" min="0" max="3" readonly required>
+              <button type="button" class="rio-step-btn" data-step="luggage" data-dir="1" aria-label="Increase luggage">+</button>
+            </div>
+          </div>
+
+          <div class="rio-field rio-full">
+            <label for="rio_name">Lead Passenger Name *</label>
+            <input type="text" id="rio_name" name="lead_name" placeholder="Full name as on passport / ID" required>
+          </div>
+
+          <div class="rio-field">
+            <label for="rio_email">Contact Email *</label>
+            <input type="email" id="rio_email" name="email" placeholder="name@domain.com" required>
+          </div>
+
+          <div class="rio-field">
+            <label for="rio_phone">WhatsApp / Phone *</label>
+            <input type="tel" id="rio_phone" name="phone" placeholder="+55 21 99999-9999" required>
+          </div>
+
+          <div class="rio-field rio-full">
+            <label for="rio_notes">Flight Number or Pickup Address / Notes</label>
+            <textarea id="rio_notes" name="notes" rows="3" placeholder="e.g. Flight AF442 arriving 06:40 or Hotel Fasano Rio reception"></textarea>
+          </div>
+        </div>
+
+        <input type="hidden" id="rio_quote_amount" name="quoted_amount" value="">
+
+        <div class="rio-fare-summary">
+          <div class="rio-fare-label">
+            <span>Guaranteed Flat Fare</span>
+            <small>Includes tolls, airport meet &amp; greet, air-conditioned vehicle</small>
+          </div>
+          <div class="rio-fare-display">
+            <span class="rio-currency">US$</span><span id="rio_display_price">210</span>
+          </div>
+        </div>
+
+        <div class="rio-nav-buttons">
+          <button type="button" class="rio-prev-step-btn" id="rio_prev_btn">&larr; Back to Trip Details</button>
+          <button type="submit" class="rio-submit-btn" id="rio_pay_btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:8px;vertical-align:middle;"><path d="M20.067 8.478c.492.315.844.825.962 1.442.54 2.825-1.393 5.485-4.22 6.025-.562.107-1.135.16-1.708.158H12.98l-.752 4.774a.434.434 0 0 1-.429.367H8.385a.36.36 0 0 1-.355-.417l2.846-18.064a.72.72 0 0 1 .71-.61h5.885c2.47 0 4.475 1.464 4.196 4.382-.093.978-.588 1.83-1.6 2.453v-.51z"/></svg>
+            Save Booking &amp; Continue to PayPal
+          </button>
+        </div>
+        <p class="rio-paypal-hint">Your booking request will be saved securely before you are redirected to PayPal to complete payment.</p>
+        <div id="rio_status" class="rio-status" role="status" aria-live="polite"></div>
+      </div>
+
+        
+        
+        
+      </form>
+    </section>
+
+    
+      <footer class="rio-footer">
+        <p>All transfers feature licensed executive drivers, highway toll pass, bottled water & flight tracking.</p>
+      </footer>
+    
+  </div>
+</div>
+<script>
+(function() {
+  // 1) Add your Supabase Project URL and publishable/anon key here after creating the project.
+  // Never put your Supabase service_role key in this public website file.
+  var SUPABASE_URL = "https://gbrbakxybodxprcnfpxi.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_dFAXSPj_Xy5KhiPqVS1mag_pH8ph2ad";
+
+  var PAYPAL_LINKS = {
+    "GIG Airport → Búzios": "https://www.paypal.com/ncp/payment/2UZR6AYHZN5GN",
+    "Búzios → GIG Airport": "https://www.paypal.com/ncp/payment/PWPXK4VYLQYMW",
+    "SDU Airport → Búzios": "https://www.paypal.com/ncp/payment/VY5FZB6EWYKGS",
+    "Búzios → SDU Airport": "https://www.paypal.com/ncp/payment/T48WKHS38BLPG",
+    "GIG Airport → Cabo Frio": "https://www.paypal.com/ncp/payment/5UAWES7APDFNA",
+    "Cabo Frio → GIG Airport": "https://www.paypal.com/ncp/payment/VTKHH7N2KDFMN",
+    "SDU Airport → Cabo Frio": "https://www.paypal.com/ncp/payment/42YF2R6LDY7TC",
+    "Cabo Frio → SDU Airport": "https://www.paypal.com/ncp/payment/L5JA9LZPV5QWG",
+    "GIG / SDU → Arraial do Cabo": "https://www.paypal.com/ncp/payment/PCYQBU5V3SMQS",
+    "Arraial do Cabo → GIG / SDU": "https://www.paypal.com/ncp/payment/ZNCWSK4HSXJ86"
+  };
+
+  var root = document.querySelector('#rio-transfer-root');
+  if (!root) return;
+  var form = root.querySelector('form');
+  var routeSelect = root.querySelector('#rio_route_select');
+  var priceDisplay = root.querySelector('#rio_display_price');
+  var hiddenQuote = root.querySelector('#rio_quote_amount');
+  var dateInput = root.querySelector('#rio_date');
+  var timeInput = root.querySelector('#rio_time');
+  var submitBtn = root.querySelector('#rio_pay_btn');
+  var nextBtn = root.querySelector('#rio_next_btn');
+  var prevBtn = root.querySelector('#rio_prev_btn');
+  var step1Panel = root.querySelector('[data-step-panel="1"]');
+  var step2Panel = root.querySelector('[data-step-panel="2"]');
+  var step1Pill = root.querySelector('[data-step-indicator="1"]');
+  var step2Pill = root.querySelector('[data-step-indicator="2"]');
+  var statusBox = root.querySelector('#rio_status');
+
+  function showStatus(message, type) {
+    if (!statusBox) return;
+    statusBox.textContent = message;
+    statusBox.className = 'rio-status ' + type;
+  }
+
+  function clearStatus() {
+    if (!statusBox) return;
+    statusBox.textContent = '';
+    statusBox.className = 'rio-status';
+  }
+
+  if (dateInput && !dateInput.value) {
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var yyyy = tomorrow.getFullYear();
+    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    var dd = String(tomorrow.getDate()).padStart(2, '0');
+    dateInput.value = yyyy + '-' + mm + '-' + dd;
+    dateInput.min = yyyy + '-' + mm + '-' + dd;
+  }
+  if (timeInput && !timeInput.value) timeInput.value = "10:00";
+
+  function selectedRoute() {
+    return routeSelect ? routeSelect.options[routeSelect.selectedIndex] : null;
+  }
+
+  function updateFare() {
+    var option = selectedRoute();
+    if (!option) return;
+    var price = option.getAttribute('data-price') || '210';
+    if (priceDisplay) priceDisplay.textContent = price;
+    if (hiddenQuote) hiddenQuote.value = price;
+  }
+
+  if (routeSelect) {
+    routeSelect.addEventListener('change', updateFare);
+    updateFare();
+  }
+
+  function showStep(stepNum) {
+    clearStatus();
+    if (stepNum === 2) {
+      var required = step1Panel ? step1Panel.querySelectorAll('input[required], select[required]') : [];
+      for (var i = 0; i < required.length; i++) {
+        if (!required[i].reportValidity()) return;
+      }
+      if (step1Panel) step1Panel.classList.add('rio-step-hidden');
+      if (step2Panel) step2Panel.classList.remove('rio-step-hidden');
+      if (step1Pill) step1Pill.classList.remove('active');
+      if (step2Pill) step2Pill.classList.add('active');
+      root.classList.add('rio-show-step-2');
+      if (root.scrollIntoView) root.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      if (step2Panel) step2Panel.classList.add('rio-step-hidden');
+      if (step1Panel) step1Panel.classList.remove('rio-step-hidden');
+      if (step2Pill) step2Pill.classList.remove('active');
+      if (step1Pill) step1Pill.classList.add('active');
+      root.classList.remove('rio-show-step-2');
+      if (root.scrollIntoView) root.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  if (nextBtn) nextBtn.addEventListener('click', function(e) { e.preventDefault(); showStep(2); });
+  if (prevBtn) prevBtn.addEventListener('click', function(e) { e.preventDefault(); showStep(1); });
+
+  root.querySelectorAll('.rio-step-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var type = btn.getAttribute('data-step');
+      var dir = parseInt(btn.getAttribute('data-dir'), 10) || 0;
+      var input = root.querySelector(type === 'passengers' ? '#rio_passengers' : '#rio_luggage');
+      if (!input) return;
+      var min = parseInt(input.getAttribute('min'), 10) || 0;
+      var max = parseInt(input.getAttribute('max'), 10) || 10;
+      var current = parseInt(input.value, 10) || min;
+      var next = current + dir;
+      if (next >= min && next <= max) input.value = next;
+    });
+  });
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      clearStatus();
+      updateFare();
+
+      var option = selectedRoute();
+      var route = option ? option.value : '';
+      var price = option ? Number(option.getAttribute('data-price')) : 0;
+      var paypalUrl = PAYPAL_LINKS[route];
+      if (!paypalUrl) {
+        showStatus('We could not find a payment link for this route. Please contact us.', 'error');
+        return;
+      }
+
+      if (!window.supabase || !window.supabase.createClient) {
+        showStatus('The booking database library could not load. Please refresh and try again.', 'error');
+        return;
+      }
+      if (SUPABASE_URL.indexOf('YOUR_') === 0 || SUPABASE_ANON_KEY.indexOf('YOUR_') === 0) {
+        showStatus('The booking database is not connected yet. The website owner must complete the Supabase setup before accepting bookings.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving your booking…';
+      showStatus('Saving your booking securely. Please wait.', 'info');
+
+      try {
+        var db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        var payload = {
+          route: route,
+          pickup_date: dateInput.value,
+          pickup_time: timeInput.value,
+          passengers: Number(root.querySelector('#rio_passengers').value),
+          luggage: Number(root.querySelector('#rio_luggage').value),
+          lead_name: root.querySelector('#rio_name').value.trim(),
+          email: root.querySelector('#rio_email').value.trim(),
+          phone: root.querySelector('#rio_phone').value.trim(),
+          notes: root.querySelector('#rio_notes').value.trim(),
+          quoted_amount: price,
+          currency: 'USD',
+          status: 'new'
+        };
+        var result = await db.from('ride_requests').insert([payload]);
+        if (result.error) throw result.error;
+
+        showStatus('Your booking request has been saved. Opening PayPal in a new tab…', 'success');
+        window.location.href = paypalUrl;
+        submitBtn.textContent = 'Booking Saved — PayPal Opened';
+      } catch (err) {
+        console.error('Booking save failed:', err);
+        showStatus('We could not save your booking, so payment has not been opened. Please try again or contact us directly.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:8px;vertical-align:middle;"><path d="M20.067 8.478c.492.315.844.825.962 1.442.54 2.825-1.393 5.485-4.22 6.025-.562.107-1.135.16-1.708.158H12.98l-.752 4.774a.434.434 0 0 1-.429.367H8.385a.36.36 0 0 1-.355-.417l2.846-18.064a.72.72 0 0 1 .71-.61h5.885c2.47 0 4.475 1.464 4.196 4.382-.093.978-.588 1.83-1.6 2.453v-.51z"/></svg>Save Booking &amp; Continue to PayPal';
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
