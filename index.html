@@ -702,8 +702,8 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
 
           <li class="rio-route-row rio-tour-row">
             <div class="rio-route-info">
-              <span class="rio-route-name">Rio de Janeiro – Full-Day City Tour</span>
-              <span class="rio-route-eta">8–9 hours · Private city tour</span>
+              <span class="rio-route-name">Rio de Janeiro City Tour</span>
+              <span class="rio-route-eta">Private sightseeing · Flexible itinerary</span>
             </div>
             <div class="rio-route-price">
               <span class="rio-currency">US$</span>280
@@ -712,8 +712,8 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
 
           <li class="rio-route-row rio-tour-row">
             <div class="rio-route-info">
-              <span class="rio-route-name">Búzios – Full-Day Coastal Tour</span>
-              <span class="rio-route-eta">7–8 hours · Private beach & sightseeing tour</span>
+              <span class="rio-route-name">Búzios City Tour</span>
+              <span class="rio-route-eta">Private beach & sightseeing · Flexible itinerary</span>
             </div>
             <div class="rio-route-price">
               <span class="rio-currency">US$</span>160
@@ -722,8 +722,8 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
 
           <li class="rio-route-row rio-tour-row">
             <div class="rio-route-info">
-              <span class="rio-route-name">Arraial do Cabo – Full-Day Coastal Tour</span>
-              <span class="rio-route-eta">8–9 hours · Private coastal tour</span>
+              <span class="rio-route-name">Arraial do Cabo City Tour</span>
+              <span class="rio-route-eta">Private coastal sightseeing · Flexible itinerary</span>
             </div>
             <div class="rio-route-price">
               <span class="rio-currency">US$</span>160
@@ -789,16 +789,16 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
                     Arraial do Cabo → GIG / SDU — US$205
                   </option>
 
-                  <option value="Rio de Janeiro – Full-Day City Tour" data-price="280">
-                    Rio de Janeiro – Full-Day City Tour — US$280
+                  <option value="Rio de Janeiro City Tour" data-price="280">
+                    Rio de Janeiro City Tour — US$280
                   </option>
 
-                  <option value="Búzios – Full-Day Coastal Tour" data-price="160">
-                    Búzios – Full-Day Coastal Tour — US$160
+                  <option value="Búzios City Tour" data-price="160">
+                    Búzios City Tour — US$160
                   </option>
 
-                  <option value="Arraial do Cabo – Full-Day Coastal Tour" data-price="160">
-                    Arraial do Cabo – Full-Day Coastal Tour — US$160
+                  <option value="Arraial do Cabo City Tour" data-price="160">
+                    Arraial do Cabo City Tour — US$160
                   </option>
               </select>
             </div>
@@ -915,9 +915,9 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
     "Cabo Frio → SDU Airport": "https://www.paypal.com/ncp/payment/L5JA9LZPV5QWG",
     "GIG / SDU → Arraial do Cabo": "https://www.paypal.com/ncp/payment/PCYQBU5V3SMQS",
     "Arraial do Cabo → GIG / SDU": "https://www.paypal.com/ncp/payment/ZNCWSK4HSXJ86",
-    "Rio de Janeiro – Full-Day City Tour": "https://www.paypal.com/ncp/payment/NTFDZCBHM98K6",
-    "Búzios – Full-Day Coastal Tour": "https://www.paypal.com/ncp/payment/RZTYSML2FX3LA",
-    "Arraial do Cabo – Full-Day Coastal Tour": "https://www.paypal.com/ncp/payment/VB2RR6825MY3C"
+    "Rio de Janeiro City Tour": "https://www.paypal.com/ncp/payment/NTFDZCBHM98K6",
+    "Búzios City Tour": "https://www.paypal.com/ncp/payment/RZTYSML2FX3LA",
+    "Arraial do Cabo City Tour": "https://www.paypal.com/ncp/payment/VB2RR6825MY3C"
   };
 
   var root = document.querySelector('#rio-transfer-root');
@@ -969,18 +969,18 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
     if (!option) return;
     var price = option.getAttribute('data-price') || '210';
     var route = option.value;
-    var isTour = /Full-Day .*Tour/.test(route);
+    var isTour = /City Tour$/.test(route);
     if (priceDisplay) priceDisplay.textContent = price;
     if (hiddenQuote) hiddenQuote.value = price;
 
     var fareTitle = root.querySelector('.rio-fare-label span');
     var fareNote = root.querySelector('.rio-fare-label small');
     var badge = root.querySelector('.rio-badge');
-    if (fareTitle) fareTitle.textContent = isTour ? 'Full-Day Tour Price' : 'Guaranteed Flat Fare';
+    if (fareTitle) fareTitle.textContent = isTour ? 'Private City Tour Price' : 'Guaranteed Flat Fare';
     if (fareNote) fareNote.textContent = isTour
-      ? 'Private full-day experience · Price per vehicle · USD'
+      ? 'Private sightseeing experience · Price per vehicle · USD'
       : 'Includes tolls, airport meet & greet, air-conditioned vehicle';
-    if (badge) badge.textContent = isTour ? 'Private Full-Day Tours' : 'Official Fixed Airport Transfers';
+    if (badge) badge.textContent = isTour ? 'Private City Tours' : 'Official Fixed Airport Transfers';
   }
 
   function syncSelectedPriceRow() {
