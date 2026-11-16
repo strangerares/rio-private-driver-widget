@@ -154,7 +154,28 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
     padding: 10px 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     font-size: 13px;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+  }
+
+  .rio-route-row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    background: rgba(15, 118, 110, 0.08);
+  }
+
+  .rio-route-row.is-selected {
+    background: rgba(15, 118, 110, 0.09);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .rio-route-row::after {
+    content: 'Select';
+    margin-left: 12px;
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
   .rio-route-row:last-child {
@@ -962,10 +983,64 @@ catch(e){try{Object.defineProperty(window,n,{value:mem(),configurable:true});}ca
     if (badge) badge.textContent = isTour ? 'Private Full-Day Tours' : 'Official Fixed Airport Transfers';
   }
 
-  if (routeSelect) {
-    routeSelect.addEventListener('change', updateFare);
-    updateFare();
+  function syncSelectedPriceRow() {
+    var rows = root.querySelectorAll('.rio-route-row');
+    var currentRoute = routeSelect ? routeSelect.value.trim() : '';
+    rows.forEach(function(row) {
+      var name = row.querySelector('.rio-route-name');
+      var isSelected = !!name && name.textContent.trim() === currentRoute;
+      row.classList.toggle('is-selected', isSelected);
+      if (isSelected) row.setAttribute('aria-pressed', 'true');
+      else row.setAttribute('aria-pressed', 'false');
+    });
   }
+
+  if (routeSelect) {
+    routeSelect.addEventListener('change', function() {
+      updateFare();
+      syncSelectedPriceRow();
+    });
+    updateFare();
+    syncSelectedPriceRow();
+  }
+
+  // Make every price-list route a direct shortcut into the booking form.
+  var priceRows = root.querySelectorAll('.rio-route-row');
+  priceRows.forEach(function(row) {
+    var name = row.querySelector('.rio-route-name');
+    if (!name) return;
+    var routeName = name.textContent.trim();
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('aria-label', 'Select ' + routeName);
+    row.setAttribute('aria-pressed', 'false');
+
+    function chooseRoute() {
+      if (!routeSelect) return;
+      var matchingOption = Array.prototype.find.call(routeSelect.options, function(option) {
+        return option.value.trim() === routeName;
+      });
+      if (!matchingOption) return;
+      routeSelect.value = matchingOption.value;
+      routeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      if (dateInput && dateInput.scrollIntoView) {
+        dateInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        var bookingSection = root.querySelector('.rio-booking-section');
+        if (bookingSection && bookingSection.scrollIntoView) {
+          bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    row.addEventListener('click', chooseRoute);
+    row.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        chooseRoute();
+      }
+    });
+  });
 
   function showStep(stepNum) {
     clearStatus();
